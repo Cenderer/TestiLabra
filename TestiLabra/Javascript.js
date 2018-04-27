@@ -12,10 +12,13 @@ function cmpr(plrChs, chs){
 		plrChs = 0;
 		if(chs==0){
 			alert("Tie!");
+			again();
 		}else if (chs==1){
             alert("You lose!");
+			again();
         }else{
             alert("You win!");
+			again();
         }		
 	break;
 	
@@ -23,29 +26,61 @@ function cmpr(plrChs, chs){
 		plrChs = 1;
 		if(chs==1){
 			alert("Tie!");
+			again();
 		}else if (chs==2){
             alert("You lose!");
+			again();
         }else{
             alert("You win!");
+			again();
         }		
 	break;
 	case "scissors":
 		plrChs = 2;
 		if(chs==2){
 			alert("Tie!");
+			again();
 		}else if (chs==0){
             alert("You lose!");
+			again();
         }else{
             alert("You win!");
+			again();
         }		
 	break;
 	
 	
 	default:
 		alert("?Something went wrong?");
+		again();
 	}
 }
-$(document).ready(function(){
+
+function aiChs() {
+	var rndNum = Math.random()*2;
+	rndNum = Math.round(rndNum);
+	chs = choices[rndNum];
+	$("#buttonDiv").append(
+	'<button class="button" id="aiChoice">chs</button>'),
+		$("#aiChoice").text(chs),
+		$("#aiChoice").animate({left: '300px'}, 'fast'),
+		$("#aiChoice").animate({top: '200px'}, 'fast', function(){
+			chs = rndNum;
+			cmpr(plrChs, chs);
+		});
+}
+	
+function again(){
+	
+	$(".button").hide("slow", function(){
+		$("#buttonDiv").append(
+	    '<button class="button" id="yes">Yes, again!</button>',
+		'<button class="button" id="nope">No, not again</button>'
+		);
+	});
+}
+
+$(document).ready(function start(){
 	var chsRock = "";
 	var chsPaper = "";
 	var chsScissors = "";
@@ -88,20 +123,6 @@ $(document).ready(function(){
 		$("#paper").animate({left: '200px'}, 'fast')
 		aiChs();
 	});
-	function aiChs() {
-		var rndNum = Math.random()*2;
-		rndNum = Math.round(rndNum);
-		chs = choices[rndNum];
-		$("#buttonDiv").append(
-		'<button class="button" id="aiChoice">chs</button>'),
-			$("#aiChoice").text(chs),
-			$("#aiChoice").animate({left: '300px'}, 'slow'),
-			$("#aiChoice").animate({top: '200px'}, 'slow', function(){
-				chs = rndNum;
-				cmpr(plrChs, chs);
-			});
-	}
-	
 });
 
 
