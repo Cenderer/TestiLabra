@@ -1,4 +1,26 @@
-{
+
+.button {
+    
+	position: relative;
+	
+	
+}
+
+#rock {
+
+    color: blue;	
+	
+	
+}
+#scissors {
+
+    color: green;	
+	
+	
+}
+#paper {
+
+    color: red;	
 	
 	
 }

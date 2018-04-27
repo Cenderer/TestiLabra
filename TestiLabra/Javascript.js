@@ -1,20 +1,41 @@
 var choices = ["Rock", "Paper", "Scissors"];
 function hmm (){
-	alert("Hello World!");
+	alert("Welcome! Welcome! You have arrived to the greatest game: 'Rock, paper or scissors?'");
 }
 $(document).ready(function(){
+	var chsRock = "";
+	var chsPaper = "";
+	var chsScissors = "";
+	
+	$("#buttonDiv").append(
+	    '<button class="button" id="rock">Rock</button>',
+	    '<button class="button" id="scissors">Scissors</button>',
+		'<button class="button" id="paper">Paper</button>'
+		
+		);
+	
+	hmm();
 	$("#rock").click(function(){
-		alert("You chose rock");
+		$("#scissors").hide('slow'),
+		$("#paper").hide('slow'),
+		$("#rock").animate({top: '200px'}, 'fast'),
+		$("#rock").animate({left: '200px'}, 'fast')
 	});
 });
 $(document).ready(function(){
-	$("#Scissors").click(function(){
-		alert("You chose scissors");
+	$("#scissors").click(function(){
+		$("#rock").hide('slow'),
+		$("#paper").hide('slow'),
+		$("#scissors").animate({top: '200px'}, 'fast'),
+		$("#scissors").animate({left: '200px'}, 'fast')
 	})
 })
 $(document).ready(function(){
-	$("#Paper").click(function(){
-		alert("You chose paper");
+	$("#paper").click(function(){
+		$("#scissors").hide('slow'),
+		$("#rock").hide('slow'),
+		$("#paper").animate({top: '200px'}, 'fast'),
+		$("#paper").animate({left: '200px'}, 'fast')
 	})
 })
-hmm();
+
