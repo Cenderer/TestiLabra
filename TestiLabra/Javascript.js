@@ -30,6 +30,20 @@ function menu(){
 };
 
 function hangManGme(){
+	$(".button").remove();
+	$("#gmeTitle").text("Hangman");
+	var correct = "Oikea Vastaus";
+	
+	//new div for guess stuff
+	var guessDiv = document.createElement('div');
+	guessDiv.id = 'guessDiv';
+	document.body.appendChild(guessDiv);
+	$("#guessDiv").append(
+		'<input id="plrInput" type="text" name="user">',
+		'<button id="submit">Try</button>'
+	);
+	
+	$("#buttonDiv").append('<p>Tähän kamaa</p>');
 	
 	
 };
