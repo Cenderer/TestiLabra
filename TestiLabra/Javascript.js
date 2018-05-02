@@ -300,6 +300,7 @@ function hangManGme(){
 	$("#buttonDiv").append('<p id="hei">Right word: </p>');
 	$("#buttonDiv").css({"background-color":"grey", "height":"100px"});
 	$("#hei").text("Correct word: ");
+	$("#buttonDiv").append('<p>Word length: ' + correctAns.length +'</p>');
 	
 	for(var i=0;i<correctAns.length;i++){
 		$('#hei').append('<span class="spans" id="div'+ i +'"></span>');
@@ -314,15 +315,30 @@ function hangManGme(){
 	
 	$("#submit").click(function(){	
 		var input  = $("#plrInput").val();
-		for(i = 0;i<correctAns.length;i++){
-			 if(input == correctAns.charAt(i)){
-				//alert("Correct!");
+		var counter = 0;
+		for(var i = 0;i<correctAns.length;i++){
+			if(input === correctAns.charAt(i)){
+				/*
+				* Tämä ei jostain syystä suostu lisäämään counter variableen 1
+				counter = counter + 1;
+				console.log(counter);
+				*/
+				alert("Correct!");
 				$("#div" + i +"").show()
-				continue;
+				$("#plrInput").val("");
+				/* ei toimi ylläolevan virheen takia
+				if(counter === correctAns.length){
+					Alert("You won!")
+					againHM()
+				}*/
+				
 			}else {
-				//alert("Wrong");
+				$("#plrInput").val("");
+				
 			}
+			
 		}
+		
 	});
 
 	
@@ -399,6 +415,7 @@ function aiChs() {
 function again(){
 	
 	$(".button").remove();
+	$("#gmeTitle").text("Again?");
 	$("#buttonDiv").append(
 	    '<button class="button" id="yes">Yes, again!</button>',
 		'<button class="button" id="nope">No, not again</button>',
@@ -407,6 +424,32 @@ function again(){
 	$("#yes").click(function(){
 		
 		R_P_S();
+		
+	});	
+	$("#nope").click(function(){
+		/*alert("There is no escape!");
+		start();*/
+		window.open("https://www.youtube.com/watch?v=dQw4w9WgXcQ","_blank", "width=500, height=500");
+		menu();
+	});
+	$("#change").click(function(){
+		menu();
+	});
+}
+
+function againHM(){
+	
+	$("*").hide();
+	$("#gmeTitle").show();
+	$("#gmeTitle").text("Again?");
+	$("#buttonDiv").append(
+	    '<button class="button" id="yes">Yes, again!</button>',
+		'<button class="button" id="nope">No, not again</button>',
+		'<button class="button" id="change">Change game</button>'
+		);
+	$("#yes").click(function(){
+		
+		hangManGme();
 		
 	});	
 	$("#nope").click(function(){
