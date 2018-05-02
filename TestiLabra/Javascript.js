@@ -30,8 +30,11 @@ function menu(){
 };
 
 function hangManGme(){
+	//clear page from buttons
 	$(".button").remove();
+	//change game title
 	$("#gmeTitle").text("Hangman");
+	//great words that the game will use as a right words
 	var correct = ["ability","able","aboard","about","above","accept","accident","according",
 	  "account","accurate","acres","across","act","action","active","activity",
 	  "actual","actually","add","addition","additional","adjective","adult","adventure",
@@ -277,10 +280,12 @@ function hangManGme(){
 	  "year","yellow","yes","yesterday","yet","you","young","younger",
 	  "your","yourself","youth","zero","zebra","zipper","zoo","zulu"
 	];
+	//Choose the correct word from the list
 	var rndNum = Math.random()*correct.length;
 	rndNum = Math.round(rndNum);
 	var correctAns = correct[rndNum];
-	alert(correctAns);
+	console.log(correctAns);
+	console.log(correctAns.length);
 	
 	//new div for guess stuff
 	var guessDiv = document.createElement('div');
@@ -291,24 +296,34 @@ function hangManGme(){
 		'<input id="plrInput" type="text" value="Give a letter or quess the correct word">',		
 		'<button id="submit">Try</button>'
 	);
-	$("#plrInput").attr("size", "25");
-	$("#buttonDiv").append('<p id="hei">Oikea sana: </p>');
+	$("#plrInput").attr("size", "35");
+	$("#buttonDiv").append('<p id="hei">Right word: </p>');
 	$("#buttonDiv").css({"background-color":"grey", "height":"100px"});
+	$("#hei").text("Correct word: ");
 	
-	for(var i=0;i<correct.length;i++){
-		$('#hei').append('<span id="div'+ i +'"></span>');
+	for(var i=0;i<correctAns.length;i++){
+		$('#hei').append('<span class="spans" id="div'+ i +'"></span>');
 		
 		$("#div"+ i+"").text(correctAns.charAt(i));
+		$("#div"+ i+"").hide()
 	}
+	
 
-	/*
-	*Melkein valmis funktio tarkastuksiin
+	
+	//Melkein valmis funktio tarkastuksiin
 	
 	$("#submit").click(function(){	
 		var input  = $("#plrInput").val();
-		$("#hei").append(input);
-		$("#hei").hide();
-	});*/
+		for(i = 0;i<correctAns.length;i++){
+			 if(input == correctAns.charAt(i)){
+				//alert("Correct!");
+				$("#div" + i +"").show()
+				continue;
+			}else {
+				//alert("Wrong");
+			}
+		}
+	});
 
 	
 };
