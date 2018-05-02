@@ -305,7 +305,7 @@ function hangManGme(){
 		$('#hei').append('<span class="spans" id="div'+ i +'"></span>');
 		
 		$("#div"+ i+"").text(correctAns.charAt(i));
-		$("#div"+ i+"").hide()
+		$("#div"+ i+"").hide();
 	}
 	
 
@@ -413,7 +413,7 @@ function again(){
 		/*alert("There is no escape!");
 		start();*/
 		window.open("https://www.youtube.com/watch?v=dQw4w9WgXcQ","_blank", "width=500, height=500");
-		
+		menu();
 	});
 	$("#change").click(function(){
 		menu();
