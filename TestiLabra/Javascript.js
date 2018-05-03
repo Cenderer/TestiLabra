@@ -6,11 +6,13 @@ $(document).ready(function(){
 		var chsRock = "";
 		var chsPaper = "";
 		var chsScissors = "";
+		
 		hmm();	
 });
 
 function hmm (){
 	alert("Welcome! You have arrived to the greatest gamecenter! " );
+	//$("style").hide();
 	menu();
 }
 
@@ -19,7 +21,8 @@ function menu(){
 	$(".button").remove();
 	$("#buttonDiv").append(
 	    '<button class="button" id="rps">Rock, Paper and Scissors!</button>',
-		'<button class="button" id="hangMan">Hangman!</button>'
+		'<button class="button" id="hangMan">Hangman!</button>',
+		'<button class="button" id="mtg">Move The Guy</button>'
 	);
 	$("#rps").click(function(){
 		R_P_S();
@@ -27,13 +30,23 @@ function menu(){
 	$("#hangMan").click(function(){
 		hangManGme();
 	});
+	$("#mtg").click(function(){
+		mtggme();
+	});
 };
+
+
+function mtggme(){
+	
+}
+
 
 function hangManGme(){
 	//clear page from buttons
-	$(".button").remove();
+	$(".button").hide();
 	//change game title
 	$("#gmeTitle").text("Hangman");
+	var counter = 0;
 	//great words that the game will use as a right words
 	var correct = ["ability","able","aboard","about","above","accept","accident","according",
 	  "account","accurate","acres","across","act","action","active","activity",
@@ -315,30 +328,41 @@ function hangManGme(){
 	
 	$("#submit").click(function(){	
 		var input  = $("#plrInput").val();
-		var counter = 0;
+		var counter1 = correctAns.length;
 		for(var i = 0;i<correctAns.length;i++){
 			if(input === correctAns.charAt(i)){
-				/*
-				* Tämä ei jostain syystä suostu lisäämään counter variableen 1
+			
 				counter = counter + 1;
-				console.log(counter);
-				*/
+				counter1 -= 1;
+				console.log(counter+"C");
+				console.log(counter1+"c1");
+				
 				alert("Correct!");
 				$("#div" + i +"").show()
 				$("#plrInput").val("");
-				/* ei toimi ylläolevan virheen takia
-				if(counter === correctAns.length){
-					Alert("You won!")
-					againHM()
-				}*/
 				
-			}else {
+				if(counter === correctAns.length){
+					alert("Correct! You guessed the word!")
+					againHM()
+				}
+				
+			}else if(input === correctAns){
+				alert("Correct! You guessed the word!");
+				for(i=0;i<correctAns.length;i++){
+					$("#div" + i +"").show()
+				}
+				againHM();
 				$("#plrInput").val("");
 				
 			}
 			
 		}
-		
+		if(counter1 == correctAns.length){
+				alert("Wrong letter!")
+				$("#plrInput").val("");
+				console.log(counter1+"c1");
+				
+			}
 	});
 
 	
@@ -439,7 +463,12 @@ function again(){
 
 function againHM(){
 	
-	$("*").hide();
+	$("#buttonDiv").css("background-color", "white");
+	$("#buttonDiv").text("");
+	$("#plrInput").hide();
+	$("#submit").hide();
+	$("#guessDiv").remove();
+	$("#gmeTitle").show();
 	$("#gmeTitle").show();
 	$("#gmeTitle").text("Again?");
 	$("#buttonDiv").append(
