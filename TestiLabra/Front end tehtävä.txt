@@ -1,0 +1,10 @@
+lomake
+valitaan laite
+lomakkeella lähetetään merkkijono
+node palvelimelle
+formi lähtee ajaxilla
+
+
+Tehkää formi
+formiin valita laitteen laitelistasta
+init samalla tyylillä kuin muutkin sivut

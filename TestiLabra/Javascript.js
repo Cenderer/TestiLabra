@@ -3,16 +3,20 @@ var chs;
 var plrChs;
 
 $(document).ready(function(){
+		$("#board").hide("fast", function(){
+			hmm();
+			
+		});
 		var chsRock = "";
 		var chsPaper = "";
 		var chsScissors = "";
 		
-		hmm();	
+		
 });
 
 function hmm (){
 	alert("Welcome! You have arrived to the greatest gamecenter! " );
-	//$("style").hide();
+	
 	menu();
 }
 
@@ -22,7 +26,7 @@ function menu(){
 	$("#buttonDiv").append(
 	    '<button class="button" id="rps">Rock, Paper and Scissors!</button>',
 		'<button class="button" id="hangMan">Hangman!</button>',
-		'<button class="button" id="mtg">Move The Guy</button>'
+		'<button class="button" id="ttt">Tick Tack Toe</button>'
 	);
 	$("#rps").click(function(){
 		R_P_S();
@@ -30,13 +34,74 @@ function menu(){
 	$("#hangMan").click(function(){
 		hangManGme();
 	});
-	$("#mtg").click(function(){
-		mtggme();
+	$("#ttt").click(function(){
+		ttt();
 	});
 };
 
 
-function mtggme(){
+function ttt(){
+	$(".button").hide();
+	$("#gmeTitle").text("Tick Tack Toe");
+	$("#board").show();
+	var move = 1;
+	var play = true;
+	var space1 = $("#board tr:nth-child(1) td:nth-child(1)").text("");
+    var space2 = $("#board tr:nth-child(1) td:nth-child(2)").text("");
+    var space3 = $("#board tr:nth-child(1) td:nth-child(3)").text("");
+    var space4 = $("#board tr:nth-child(2) td:nth-child(1)").text("");
+    var space5 = $("#board tr:nth-child(2) td:nth-child(2)").text("");
+    var space6 = $("#board tr:nth-child(2) td:nth-child(3)").text("");
+    var space7 = $("#board tr:nth-child(3) td:nth-child(1)").text("");
+    var space8 = $("#board tr:nth-child(3) td:nth-child(2)").text("");
+    var space9 = $("#board tr:nth-child(3) td:nth-child(3)").text("");
+	var counter = 0;
+
+	$("#board tr td").click(function() {
+		counter++;
+		if ($(this).text()=="" && play) {
+			if ((move%2)==1) { $(this).append("X"); } 
+			else { $(this).append("O"); }
+			move++;
+			if (checkForWinner()!=-1 && checkForWinner()!="") { 
+			
+				if (checkForWinner()=="X") { 
+					alert("Player 1 wins!");
+					againttt();
+				}
+				else { alert("Player 2 wins!"); play = false; againttt();	 }
+					play = false;
+				
+		  }else if(checkForWinner()== -1 && counter == 9){
+					alert("Tie!")
+					againttt();
+				}
+		}
+	});
+	function checkForWinner() {
+    space1 = $("#board tr:nth-child(1) td:nth-child(1)").text();
+    space2 = $("#board tr:nth-child(1) td:nth-child(2)").text();
+    space3 = $("#board tr:nth-child(1) td:nth-child(3)").text();
+    space4 = $("#board tr:nth-child(2) td:nth-child(1)").text();
+    space5 = $("#board tr:nth-child(2) td:nth-child(2)").text();
+    space6 = $("#board tr:nth-child(2) td:nth-child(3)").text();
+    space7 = $("#board tr:nth-child(3) td:nth-child(1)").text();
+    space8 = $("#board tr:nth-child(3) td:nth-child(2)").text();
+    space9 = $("#board tr:nth-child(3) td:nth-child(3)").text();
+    // check rows
+    if      ((space1==space2) && (space2==space3)) { return space3; }
+    else if ((space4==space5) && (space5==space6)) { return space6; }	
+    else if ((space7==space8) && (space8==space9)) { return space9; }
+    // check columns
+    else if ((space1==space4) && (space4==space7)) { return space7; }
+    else if ((space2==space5) && (space5==space8)) { return space8; }
+    else if ((space3==space6) && (space6==space9)) { return space9; }
+    // check diagonals
+    else if ((space1==space5) && (space5==space9)) { return space9; }
+    else if ((space3==space5) && (space5==space7)) { return space7; }
+    // no winner
+    return -1;
+  }
 	
 }
 
@@ -491,6 +556,35 @@ function againHM(){
 		menu();
 	});
 }
+
+function againttt(){
+	//$("#board").hide();
+	$(".button").remove();
+	$("#gmeTitle").text("Again?");
+	$("#buttonDiv").append(
+	    '<button class="button" id="yes">Yes, again!</button>',
+		'<button class="button" id="nope">No, not again</button>',
+		'<button class="button" id="change">Change game</button>'
+		);
+	$("#yes").click(function(){
+		
+		ttt();
+		
+	});	
+	$("#nope").click(function(){
+		/*alert("There is no escape!");
+		start();*/
+		window.open("https://www.youtube.com/watch?v=dQw4w9WgXcQ","_blank", "width=500, height=500");
+		$("#board").hide();
+		menu();
+	});
+	$("#change").click(function(){
+		$("#board").hide();
+		menu();
+	});
+	
+}
+
 
 function R_P_S(){
 	$("#gmeTitle").text("Rock, Paper, Scissors");
