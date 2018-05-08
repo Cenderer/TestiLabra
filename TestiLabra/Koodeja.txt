@@ -1,0 +1,15 @@
+function buttonCreation(where,id){
+	var button = document.createElement("button");
+    	button.id = id;
+	$("#where").append(button);
+}
+
+
+
+
+/* Buttonin nimen vaihto painettaessa*/
+$("#deviceInfoTimeSliderToggleButton").click(function () {
+        $(this).text(function(i, text){
+        return text === "Show settings" ? "Hide settings" : "Show settings";
+        })
+});
